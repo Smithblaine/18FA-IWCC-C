@@ -67,9 +67,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MoreyPizzaCustomerDB.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MoreyPizzaCustomerDB.aspx.cs">
+      <DependentUpon>MoreyPizzaCustomerDB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MoreyPizzaCustomerDB.aspx.designer.cs">
+      <DependentUpon>MoreyPizzaCustomerDB.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

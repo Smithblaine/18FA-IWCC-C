@@ -9,6 +9,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
+                Enter your name:  <asp:TextBox ID="Name" runat="server"></asp:TextBox><br /><br />
+                Search by name:  <asp:TextBox ID="nameSearch" runat="server"></asp:TextBox>  Enter name then Submit<br /><br />
+                Select two toppings:  <asp:TextBox ID="toppings" runat="server">first topping, second topping</asp:TextBox><br />
+                Will this be delivery or carry out? <asp:TextBox ID="doc" runat="server"></asp:TextBox>
+                <br />
+                <br />
+                <input id="Submit" type="submit" value="Submit Order" />
         </div>
     </form>
 </body>
