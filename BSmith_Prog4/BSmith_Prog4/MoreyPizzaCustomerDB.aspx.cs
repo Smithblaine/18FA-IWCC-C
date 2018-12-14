@@ -17,22 +17,21 @@ namespace BSmith_Prog4
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlConnection test = new SqlConnection("Data Source = path-todatabase; Integrated Security = true");
+            try
+            {
+                test.Open();
+                test.ChangeDatabase("pizza_choice");
+                Response.Write("<p>Connected successfully</p>");
+            }
+            catch (SqlException sqle)
+            {
+                Response.Write("<p>" +sqle.Number +", "+sqle.Message+"</p>");
+            }
             
             if (Page.IsPostBack)
             {
                 form1.Visible = false;
-                
-                try
-                {
- 
-                    SqlConnection test = new SqlConnection(@"Data Source=(http://localhost/phpmyadmin/index.php);Initial Catalog=test\pizzaChoice;Integrated Security=false;User Id=root;Password=pass");
-                    test.Open();
-              
-                }
-                catch (SqlException sqle)
-                {
-                    Response.Write("<p>" +sqle.Number +", "+sqle.Message+"</p>");
-                }
 
                 if (nameSearch.Text == null || nameSearch.Text =="")
                 {
@@ -41,6 +40,17 @@ namespace BSmith_Prog4
                 else
                 {
                     //Search database by the users name
+                    string searchByName = "SELECT * FROM pizza_choice WHERE " + nameSearch.Text + " = name";
+                    SqlCommand execute = new SqlCommand(searchByName,test);
+
+                    SqlDataReader read = execute.ExecuteReader();
+                    if (read.Read())
+                    {
+                        do
+                        {
+                            Response.Write(read["name"] + ", Pizza size: " + read["pizzaSize"] + " The toppings are: " + read["twoToppings"]);
+                        } while (read.Read());
+                    }
                 }
 
                 if (Name.Text != null && Name.Text !="" && 
@@ -48,6 +58,8 @@ namespace BSmith_Prog4
                     doc != null && doc.Text != "")
                 {
                     //send data
+                    string sendOrder = "SELECT * FROM pizza_choice WHERE " + nameSearch.Text + " = name";
+                    SqlCommand execute = new SqlCommand(searchByName, test);
                 }
 
                 if (Name.Text == null || Name.Text == "")
@@ -65,6 +77,7 @@ namespace BSmith_Prog4
                     //require shipping method
                 }
             }
+            test.Close();
         }
     }
 }
