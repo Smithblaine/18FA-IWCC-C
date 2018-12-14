@@ -75,7 +75,6 @@ namespace BSmith_Prog4
                 {
                     Response.Write("<p>One or more fields have been left blank</p>");
                 }
-                
             }
             test.Close();
         }
