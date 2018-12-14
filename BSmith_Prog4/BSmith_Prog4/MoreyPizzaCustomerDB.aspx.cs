@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Blaine Smith
+ * Project 4 Due Friday, 12-14-2018
+ * NONE
+ * This program will send the users information to a database once entered by the user,
+ * If the user desires to request data, the program will then access the database to then output data.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
