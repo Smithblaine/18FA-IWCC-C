@@ -33,9 +33,22 @@ namespace BSmith_Prog4
             {
                 form1.Visible = false;
 
+                if (toppings.Text == null || toppings.Text == "" || toppings.Text.Equals("first topping, second topping"))
+                {
+                    //require toppings
+                    Response.Write("<p>You must enter two toppings of your choice</p>");
+                }
+
+                if (doc == null && doc.Text == "")
+                {
+                    //require shipping method
+                    Response.Write("<p>You must enter your prefered metohd of delivery</p>");
+                }
+
                 if (nameSearch.Text == null || nameSearch.Text =="")
                 {
-
+                    //require the name
+                    Response.Write("<p>You must enter your name</p>");
                 }
                 else
                 {
@@ -58,24 +71,12 @@ namespace BSmith_Prog4
                     doc != null && doc.Text != "")
                 {
                     //send data
-                    string sendOrder = "SELECT * FROM pizza_choice WHERE " + nameSearch.Text + " = name";
-                    SqlCommand execute = new SqlCommand(searchByName, test);
+                    string sendOrder = "INSERT INTO pizzaChoice" +
+                                       "VALUES(null,"+size.Text+","+toppings.Text+","+doc.Text+","+Name.Text+")";
+                    SqlCommand execute = new SqlCommand(sendOrder, test);
                 }
 
-                if (Name.Text == null || Name.Text == "")
-                {
-                    //require the name
-                }
-
-                if (toppings.Text == null && toppings.Text == "")
-                {
-                    //require toppings
-                }
-
-                if (doc == null && doc.Text == "")
-                {
-                    //require shipping method
-                }
+                
             }
             test.Close();
         }
