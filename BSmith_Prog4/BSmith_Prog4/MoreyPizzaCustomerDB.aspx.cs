@@ -10,11 +10,6 @@ namespace BSmith_Prog4
 {
     public partial class MoreyPizzaCustomerDB : System.Web.UI.Page
     {
-        public static void testConnection()
-        {
-            
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             SqlConnection test = new SqlConnection("Data Source = path-todatabase; Integrated Security = true");
@@ -39,7 +34,7 @@ namespace BSmith_Prog4
                     Response.Write("<p>You must enter two toppings of your choice</p>");
                 }
 
-                if (doc == null && doc.Text == "")
+                if (doc == null || doc.Text == "")
                 {
                     //require shipping method
                     Response.Write("<p>You must enter your prefered metohd of delivery</p>");
@@ -68,14 +63,18 @@ namespace BSmith_Prog4
 
                 if (Name.Text != null && Name.Text !="" && 
                     toppings.Text != null && toppings.Text != "" && 
-                    doc != null && doc.Text != "")
+                    doc != null && doc.Text != "" &&
+                    size.Text != null && size.Text != "")
                 {
                     //send data
                     string sendOrder = "INSERT INTO pizzaChoice" +
                                        "VALUES(null,"+size.Text+","+toppings.Text+","+doc.Text+","+Name.Text+")";
                     SqlCommand execute = new SqlCommand(sendOrder, test);
                 }
-
+                else
+                {
+                    Response.Write("<p>One or more fields have been left blank</p>");
+                }
                 
             }
             test.Close();
